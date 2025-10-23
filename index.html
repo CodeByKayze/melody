@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>For Melody 💞</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: light; }
+    body {
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    }
+    .tab-btn[aria-selected="true"] {
+      color: rgb(219 39 119);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-pink-200 via-pink-300 to-rose-300 flex flex-col items-center text-center p-4">
+
+  <!-- Background Music -->
+  <audio id="bgMusic" autoplay loop muted>
+    <source src="Reunion.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    // Soft autoplay trick
+    window.addEventListener('load', () => {
+      const audio = document.getElementById('bgMusic');
+      audio.play().then(() => {
+        setTimeout(() => {
+          audio.muted = false;
+        }, 1000);
+      }).catch(err => {
+        console.warn('Autoplay might be blocked:', err);
+      });
+    });
+  </script>
+
+  <!-- Header -->
+  <header class="mt-10 mb-6">
+    <h1 class="text-5xl font-extrabold text-white drop-shadow-lg tracking-wide">For Melody 💞</h1>
+  </header>
+
+  <!-- Main Content -->
+  <main class="bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl p-6 w-full max-w-md flex-1 border border-pink-200">
+    <section id="tab-home" class="tab-panel">
+      <h2 class="text-2xl font-semibold text-pink-600 mb-3">Hey Melody 💗</h2>
+      <p class="text-gray-700 leading-relaxed text-lg">
+        I made this little website just for you because you mean more to me than words can say.
+        Every moment with you feels perfect, and I just want you to know how much I love you.
+        You’re my favorite person, my comfort, and my forever. 💘
+      </p>
+      <p class="text-gray-700 mt-4 text-lg">
+        I made this to show how much I love and appreciate you babyyy. I hope you enjoy this 💖
+      </p>
+    </section>
+
+    <section id="tab-messages" class="tab-panel hidden">
+      <h2 class="text-xl font-semibold text-pink-600 mb-2">Sweet Words 💌</h2>
+      <ul class="space-y-3 text-gray-700 text-lg text-left">
+        <li>• I love your laugh, I love your voice, and you make me so happy. I couldn’t wish for a better girl.</li>
+        <li>• You make my world brighter every single day.</li>
+        <li>• Your laugh is my favorite sound in the world.</li>
+        <li>• You’re the best girl in the world. I couldn’t wish for better. 💖</li>
+        <li>• You’ll always have my heart, no matter what. 💕</li>
+      </ul>
+    </section>
+
+    <section id="tab-music" class="tab-panel hidden">
+      <h2 class="text-xl font-semibold text-pink-600 mb-3">Songs That Remind Me of You 🎶</h2>
+      <div class="space-y-5">
+        <iframe src="https://open.spotify.com/embed/track/7cSwv1A2yKLUIf7ya0tKxJ?utm_source=generator"
+          width="100%" height="80"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          class="rounded-lg shadow-md"></iframe>
+
+        <iframe src="https://open.spotify.com/embed/track/4WFgvKVfEhb3IUAFGrutTR?utm_source=generator"
+          width="100%" height="80"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          class="rounded-lg shadow-md"></iframe>
+
+        <iframe src="https://open.spotify.com/embed/track/50gchdAhBUnVOLqQRyKE9L?utm_source=generator"
+          width="100%" height="80"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          class="rounded-lg shadow-md"></iframe>
+
+        <iframe src="https://open.spotify.com/embed/track/1imJDIpA1lc0pmXEKQDXPV?utm_source=generator"
+          width="100%" height="80"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          class="rounded-lg shadow-md"></iframe>
+      </div>
+      <p class="text-sm text-gray-500 mt-3">These songs make me think of you every single time 💘</p>
+    </section>
+  </main>
+
+  <!-- Navigation -->
+  <nav class="fixed bottom-0 left-0 right-0 flex justify-center">
+    <div class="bg-white/90 backdrop-blur-xl w-full max-w-md rounded-t-3xl flex justify-around py-3 border-t border-pink-300 shadow-md">
+      <button class="tab-btn flex flex-col items-center text-sm text-gray-500" data-target="home" aria-selected="true">
+        <span class="mb-1">❤️</span>
+        Home
+      </button>
+      <button class="tab-btn flex flex-col items-center text-sm text-gray-500" data-target="messages" aria-selected="false">
+        <span class="mb-1">💬</span>
+        Messages
+      </button>
+      <button class="tab-btn flex flex-col items-center text-sm text-gray-500" data-target="music" aria-selected="false">
+        <span class="mb-1">🎵</span>
+        Music
+      </button>
+    </div>
+  </nav>
+
+  <!-- Tab switching -->
+  <script>
+    const buttons = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.tab-panel');
+
+    function showTab(target) {
+      panels.forEach(panel => {
+        panel.classList.toggle('hidden', panel.id !== `tab-${target}`);
+      });
+      buttons.forEach(btn => btn.setAttribute('aria-selected', btn.dataset.target === target));
+    }
+
+    buttons.forEach(btn => btn.addEventListener('click', () => showTab(btn.dataset.target)));
+  </script>
+</body>
+</html>
