@@ -19,22 +19,32 @@
     }
   </style>
 </head>
-<body class="min-h-screen bg-gradient-to-b from-pink-200 via-pink-300 to-rose-300 flex flex-col items-center text-center p-4">
+<body class="min-h-screen bg-gradient-to-b from-pink-200 via-pink-300 to-rose-300 flex flex-col items-center text-center p-4 relative overflow-hidden">
 
   <!-- Background Music -->
-  <audio id="bgMusic" autoplay loop muted>
+  <audio id="bgMusic" loop>
     <source src="Reunion.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 
+  <!-- Sound Permission Overlay -->
+  <div id="soundPrompt" class="fixed inset-0 z-50 bg-pink-200/90 backdrop-blur-lg flex flex-col justify-center items-center text-center p-6">
+    <h2 class="text-3xl font-bold text-pink-700 mb-3 drop-shadow-md">🔊 Sound Permission</h2>
+    <p class="text-lg text-pink-800 mb-6 max-w-xs">Tap below to allow the background music to play 💗</p>
+    <button id="enableSound" class="px-6 py-3 bg-pink-500 text-white text-lg font-semibold rounded-full shadow-md hover:bg-pink-600 transition">
+      Allow Sound
+    </button>
+  </div>
+
   <script>
-    // Fade-in music after load
-    window.addEventListener('load', () => {
-      const audio = document.getElementById('bgMusic');
-      let volume = 0;
+    const overlay = document.getElementById('soundPrompt');
+    const button = document.getElementById('enableSound');
+    const audio = document.getElementById('bgMusic');
+
+    button.addEventListener('click', () => {
       audio.volume = 0;
       audio.play().then(() => {
-        audio.muted = false;
+        let volume = 0;
         const fade = setInterval(() => {
           if (volume < 0.5) {
             volume += 0.01;
@@ -42,9 +52,12 @@
           } else {
             clearInterval(fade);
           }
-        }, 100); // smooth fade over ~5 seconds
+        }, 100);
+        overlay.classList.add('opacity-0');
+        setTimeout(() => overlay.remove(), 500);
       }).catch(err => {
-        console.warn('Autoplay might be blocked:', err);
+        alert('Please enable sound manually in your browser settings.');
+        console.error('Playback error:', err);
       });
     });
   </script>
@@ -128,18 +141,15 @@
     </div>
   </nav>
 
-  <!-- Tab switching -->
   <script>
     const buttons = document.querySelectorAll('.tab-btn');
     const panels = document.querySelectorAll('.tab-panel');
-
     function showTab(target) {
       panels.forEach(panel => {
         panel.classList.toggle('hidden', panel.id !== `tab-${target}`);
       });
       buttons.forEach(btn => btn.setAttribute('aria-selected', btn.dataset.target === target));
     }
-
     buttons.forEach(btn => btn.addEventListener('click', () => showTab(btn.dataset.target)));
   </script>
 </body>
