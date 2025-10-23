@@ -28,13 +28,21 @@
   </audio>
 
   <script>
-    // Soft autoplay trick
+    // Fade-in music after load
     window.addEventListener('load', () => {
       const audio = document.getElementById('bgMusic');
+      let volume = 0;
+      audio.volume = 0;
       audio.play().then(() => {
-        setTimeout(() => {
-          audio.muted = false;
-        }, 1000);
+        audio.muted = false;
+        const fade = setInterval(() => {
+          if (volume < 0.5) {
+            volume += 0.01;
+            audio.volume = volume;
+          } else {
+            clearInterval(fade);
+          }
+        }, 100); // smooth fade over ~5 seconds
       }).catch(err => {
         console.warn('Autoplay might be blocked:', err);
       });
@@ -63,10 +71,10 @@
     <section id="tab-messages" class="tab-panel hidden">
       <h2 class="text-xl font-semibold text-pink-600 mb-2">Sweet Words 💌</h2>
       <ul class="space-y-3 text-gray-700 text-lg text-left">
-        <li>• I love your laugh, I love your voice, and you make me so happy. I couldn’t wish for a better girl.</li>
+        <li>• I love your laugh, I love your voice, and you make me so happy. You’re the best girl ever.</li>
         <li>• You make my world brighter every single day.</li>
         <li>• Your laugh is my favorite sound in the world.</li>
-        <li>• You’re the best girl in the world. I couldn’t wish for better. 💖</li>
+        <li>• You’re the best girl in the world. 💖</li>
         <li>• You’ll always have my heart, no matter what. 💕</li>
       </ul>
     </section>
