@@ -17,6 +17,10 @@
       color: rgb(219 39 119);
       font-weight: 600;
     }
+    .fade-out {
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
   </style>
 </head>
 <body class="min-h-screen bg-gradient-to-b from-pink-200 via-pink-300 to-rose-300 flex flex-col items-center text-center p-4 relative overflow-hidden">
@@ -28,11 +32,13 @@
   </audio>
 
   <!-- Sound Permission Overlay -->
-  <div id="soundPrompt" class="fixed inset-0 z-50 bg-pink-200/90 backdrop-blur-lg flex flex-col justify-center items-center text-center p-6">
-    <h2 class="text-3xl font-bold text-pink-700 mb-3 drop-shadow-md">🔊 Sound Permission</h2>
-    <p class="text-lg text-pink-800 mb-6 max-w-xs">Tap below to allow the background music to play 💗</p>
-    <button id="enableSound" class="px-6 py-3 bg-pink-500 text-white text-lg font-semibold rounded-full shadow-md hover:bg-pink-600 transition">
-      Allow Sound
+  <div id="soundPrompt" class="fixed inset-0 z-50 flex flex-col justify-center items-center text-center bg-gradient-to-b from-pink-200 via-pink-300 to-rose-300 backdrop-blur-xl">
+    <h2 class="text-4xl font-extrabold text-pink-700 mb-4 drop-shadow-lg">🔊 Allow Sound</h2>
+    <p class="text-lg text-pink-800 mb-6 max-w-xs leading-relaxed">
+      Tap below to let the music play. It makes the experience feel more special 💗
+    </p>
+    <button id="enableSound" class="px-8 py-3 bg-pink-500 text-white text-lg font-semibold rounded-full shadow-lg hover:bg-pink-600 transition">
+      Play Music
     </button>
   </div>
 
@@ -53,10 +59,10 @@
             clearInterval(fade);
           }
         }, 100);
-        overlay.classList.add('opacity-0');
-        setTimeout(() => overlay.remove(), 500);
+        overlay.classList.add('fade-out');
+        setTimeout(() => overlay.remove(), 700);
       }).catch(err => {
-        alert('Please enable sound manually in your browser settings.');
+        alert('Please allow audio playback in your browser settings.');
         console.error('Playback error:', err);
       });
     });
@@ -72,12 +78,7 @@
     <section id="tab-home" class="tab-panel">
       <h2 class="text-2xl font-semibold text-pink-600 mb-3">Hey Melody 💗</h2>
       <p class="text-gray-700 leading-relaxed text-lg">
-        I made this little website just for you because you mean more to me than words can say.
-        Every moment with you feels perfect, and I just want you to know how much I love you.
-        You’re my favorite person, my comfort, and my forever. 💘
-      </p>
-      <p class="text-gray-700 mt-4 text-lg">
-        I made this to show how much I love and appreciate you babyyy. I hope you enjoy this 💖
+        I made this little website just for you because you mean more to me than words ever could. Every moment with you feels like something out of a dream, and I just want you to know how deeply I love you. You’re my favorite person, my comfort, my happiness, and my forever, babyy. I hope this shows how much I love and appreciate you, and that it makes you smile the way you make me smile every day. 💘
       </p>
     </section>
 
